@@ -3,52 +3,62 @@ export const products = [
     {
         id: "1",
         name: "bed",
-        cost: 1.2
+        mc: 1.2,
+        quan: 0
     },
     {   
         id: "2",
         name: "refrigerator",
-        cost: 1
+        mc: 1,
+        quan: 0
     },
     {    
         id: "3",
         name: "forniture",
-        cost: 0.5
+        mc: 0.5,
+        quan: 0
     },
     {     
         id: "4",
         name: "oven",
-        cost: 0.6
+        mc: 0.6,
+        quan: 0
     }, 
     {
         id: "5",
         name: "sofa",
-        cost: 1.5
+        mc: 1.5,
+        quan: 0
     },
     {
         id: "6",
         name: "tv",
-        cost: 0.25
+        mc: 0.25,
+        quan: 0
     },
     {
         id: "7",
         name: "washer-dryer",
-        cost: 0.5
+        mc: 0.5,
+        quan: 0
     },
     {  
         id: "8",
         name: "dining",
-        cost: 2
+        mc: 2,
+        quan: 0
     },
     { 
         id: "9",
         name: "desk",
-        cost: 0.75
+        mc: 0.75,
+        quan: 0
     },
     {
         id: "10",
         name: "wardrobe",
-        cost: 3.2
+        mc: 3.2,
+        quan: 0
     }
     
 
