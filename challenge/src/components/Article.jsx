@@ -1,8 +1,15 @@
 
 
 export const Article = ( { data, addArticle, dimArticle } ) => {
-  const { id, name, quan } = data;
+  const { id, name, quan, contador } = data;
   
+  const minimoPermitido = ( contador )=> {
+    let p = true
+    contador > 0? p = false : p
+    return p
+  }
+
+ 
   return (
 
       
@@ -21,7 +28,7 @@ export const Article = ( { data, addArticle, dimArticle } ) => {
           {/* Inicio contenedor para seleccionar cantidades */}
 
           <div className='flex mt-6 shadow-lg'>
-            <button 
+            <button disabled =  { minimoPermitido( contador )}
               className='btn-restar w-8 h-9 bg-[#E2E2E2]' 
               onClick={ () => dimArticle( id ) }
             >
@@ -29,7 +36,7 @@ export const Article = ( { data, addArticle, dimArticle } ) => {
             </button>
             
             <div className=' flex-grow justify-center border-[#E2E2E2] border-[1px] grid content-center'>
-              <p>{ quan }</p>
+              <p>{ contador }</p>
             </div>
             
             <button 

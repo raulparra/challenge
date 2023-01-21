@@ -3,6 +3,7 @@
 export const TYPES = {
     ADD: 'ADD',
     DIM: 'DIM',
+    DIM_ONE: 'DIM_ONE',
     RESET: 'RESET',
     TAX: 'TAX',
     TOTAL: 'TOTAL',

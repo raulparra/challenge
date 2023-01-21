@@ -13,6 +13,7 @@ export const UserProvider = ( props ) => {
 
   const [globalState, dispatch] = useReducer(selectReducer, inicialState);
 
+  const { products, cart } =  globalState;
  
    const addArticle = ( id ) => {
     const action = {
