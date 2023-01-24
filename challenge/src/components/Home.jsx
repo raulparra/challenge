@@ -18,7 +18,7 @@ export const Home = () => {
       <div className='mt-24 mb-10'>
         <div className="w-[80%] m-auto flex justify-center">
           <ul className='w-full'>
-            <div className='grid grid-cols-5 gap-7'>
+            <div className='grid grid-cols-1 gap-7 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5'>
               {
                 ctx.globalState.products.map( product => (
         

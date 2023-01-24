@@ -1,8 +1,7 @@
 import { UserContext } from "./UserContext";
-import { products } from "../data/products";
-import { TYPES } from '../actions/selectActions';
 import { inicialState, selectReducer } from "./selectReducer";
 import { useReducer } from "react";
+import { TYPES } from '../actions/selectActions';
 
 
 export const UserProvider = ( props ) => {

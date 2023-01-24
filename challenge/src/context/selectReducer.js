@@ -105,30 +105,9 @@ export const selectReducer = ( state = inicialState, action ) => {
             }
             
         }
-        case TYPES.ADDTOCART:{
-           return 
-        }
         case TYPES.RESET:{
             return inicialState;
-        }
-        case TYPES.TAX:{
-            
-        }
-        case TYPES.TOTAL:{
-
-        }
-        case TYPES.TOTALM:{
-
-        }
-        case TYPES.SUBT:{
-
-        }
-        case TYPES.DUE:{
-            
-        }
-            
-            
-    
+        }    
         
     }
 };
