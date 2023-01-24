@@ -37,6 +37,7 @@ export const inicialState = {
     }
         
         sumOfM2 = newArray.reduce((acc, cur) => acc + cur.tmc, 0);
+        sumOfM2.toFixed(2)
         let sumOfsubtotal = sumOfM2 * 200
         sumOfsubtotal.toFixed(2)
         let sumTax = sumOfsubtotal * .16
