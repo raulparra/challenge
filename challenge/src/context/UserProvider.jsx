@@ -32,41 +32,18 @@ export const UserProvider = ( props ) => {
   }
   
   const reset = () =>{
-    dispatch( { type: TYPES.RESET } )
-  }
-  const addToCart = ( id ) => {
     const action = {
-      type: TYPES.ADDTOCART,
-      payload: id
+      type: TYPES.RESET,
+      
     }
+    dispatch( action )
   }
-  const precioTotal = () => {
-    dispatch( { type: TYPES.TOTAL } )
-  }
-  const subTotal = () => {
-    dispatch( { type: TYPES.SUBT } )
-  }
-  const taX = () => {
-    dispatch( { type: TYPES.TAX } )
-  }
-  const totalM = () => {
-    dispatch( { type: TYPES.TOTALM } )
-  }
-  const dueOff = () => {
-    dispatch( { type: TYPES.DUE })
-  }
-  
-const summaryUpdate = ( {summary}) => {
-  const action = {
-    type: TYPES.CTOTALITEMS,
-    payload: summary
-  }    
-} 
+ 
 
   return (
     <UserContext.Provider 
       value = {  
-             {globalState, addArticle, dimArticle, reset, addToCart, precioTotal, subTotal, taX, totalM, dueOff, summaryUpdate}
+             {globalState, addArticle, dimArticle, reset}
         } >
 
         { props.children }

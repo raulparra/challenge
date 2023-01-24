@@ -2,6 +2,7 @@ import { Article } from './Article';
 import { Summary } from './Summary';
 import { useContext, useReducer } from 'react';
 import { UserContext } from '../context/UserContext';
+import { Button } from './Button';
 
 
 
@@ -14,7 +15,7 @@ export const Home = () => {
 
   return (
     <>
-      <div className='mt-24 mb-24'>
+      <div className='mt-24 mb-10'>
         <div className="w-[80%] m-auto flex justify-center">
           <ul className='w-full'>
             <div className='grid grid-cols-5 gap-7'>
@@ -31,6 +32,7 @@ export const Home = () => {
           </ul>
         </div>
       </div>
+      <Button reset = { ctx.reset }/>
       <Summary summary = { summary }  />
     </>
   )

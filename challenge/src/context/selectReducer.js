@@ -15,47 +15,49 @@ export const inicialState = {
          
 };
 
-//función para actualizar la propiedad 'quan' del producto seleccionado
-const updateObjectInArray = (array, action) => {
-
-    return array.map((item, index) => {
-        //debugger
-      if (index + 1 !== action.index) {
-        // Si no es, se deja tal cual
-        return item
-      }
-    
-        // Si es, actualiza la propiedad quan del producto seleccionado
-      return {
-        ...item,
-        quan: action.quan
-      }
-    })
-  }
-  //Fin de la función
-
-
-const updateTotalItems = ( array, funcion) => {
-
-    let contador = 1;
+ const updateSummary = ( array, article, funcion ) => {
+    let contador = 0;
+    let newSummary ={}
+    let sumOfM2 = 0;
+    let newArray = [];
     if (funcion === 'ADD' ) {
-        for (let value of array) {
-            contador = contador + value.quan
+               
+        if (array.find(item => item.id === article.id) === undefined) {
+            newArray = [...array, article]
+            contador = newArray.reduce((acc, cur) => acc + cur.quan, 0);
+        }else{
+            newArray = array.map(item => item.id === article.id ? {...item, quan: item.quan + 1,  tmc: item.mc * (item.quan + 1)}: item)
+            contador = newArray.reduce((acc, cur) => acc + cur.quan, 0);   
         }
-        console.log(contador);
+        
+    }else{
+        newArray = array.map(item => item.id === article.id ? {...item, quan: item.quan - 1,  tmc: item.mc * (item.quan - 1)}: item)
+        contador = newArray.reduce((acc, cur) => acc + cur.quan, 0);
         
     }
-    return contador
-   
- }
- const updateTotalM = ( array, article ) => {
+        
+        sumOfM2 = newArray.reduce((acc, cur) => acc + cur.tmc, 0);
+        let sumOfsubtotal = sumOfM2 * 200
+        sumOfsubtotal.toFixed(2)
+        let sumTax = sumOfsubtotal * .16
+        sumTax.toFixed(2)
+        let sumTotal = sumOfsubtotal + sumTax
+        sumTotal.toFixed(2)
+        let descuento = sumTotal/2
+        descuento.toFixed(2);
     
-    
- }
+        newSummary = {
+            totalItems: contador,
+            totalM: sumOfM2,
+            subtotal: sumOfsubtotal,
+            tax: sumTax,
+            total: sumTotal,
+            dueToday: descuento
+        }
+        
 
- const updateSummary = ( summary, array, article ) => {
-    
-    
+    return newSummary 
+
  }
 
 
@@ -67,21 +69,21 @@ export const selectReducer = ( state = inicialState, action ) => {
 
             let newItem = state.products.find(product => product.id === action.payload);
             let itemInCart = state.cart.find(item => item.id === newItem.id)
-            let summaryTI = updateTotalItems([...state.cart], 'ADD')
-            let summaryM2 = updateTotalM( [...state.cart], newItem )
+            let summaryUpdate = updateSummary (state.cart, newItem, 'ADD')
+           
             
             return itemInCart ?
              {
                ...state,
-               cart: state.cart.map(item => item.id === newItem.id ? {...item, quan: item.quan + 1, contador: item.contador + 1, tmc: item.mc * (item.quan + 1)} : item),
+               cart: state.cart.map(item => item.id === newItem.id ? {...item, quan: item.quan + 1, tmc: item.mc * (item.quan + 1)} : item),
                products: state.products.map(item => item.id === newItem.id ? {...item, contador: item.contador + 1 } : item),
-               summary: {...state.summary, totalItems: summaryTI,  }
+               summary: summaryUpdate
              }: 
             {
                 ...state,
-                cart: [ ...state.cart, {...newItem, contador: newItem.contador + 1, tmc: newItem.mc * newItem.quan} ],
-                summary: {...state.summary, totalItems: summaryTI,  } ,
-                products: state.products.map(item => item.id === newItem.id ? {...item, contador: item.contador + 1} : item)
+                cart: [ ...state.cart, {...newItem, tmc: newItem.mc * newItem.quan} ],
+                products: state.products.map(item => item.id === newItem.id ? {...item, contador: item.contador + 1} : item),
+                summary: summaryUpdate
             }   
             
            
@@ -89,17 +91,17 @@ export const selectReducer = ( state = inicialState, action ) => {
         case TYPES.DIM:{
 
             let itemToDelete = state.cart.find(item => item.id === action.payload);
-            let summaryTI = updateTotalItems([...state.cart], 'DIM')
+            let summaryUpdate = updateSummary (state.cart, itemToDelete, 'DIM')
             return itemToDelete.quan > 1 ?{
                 ...state,
-                cart: state.cart.map(item => item.id === itemToDelete.id ? {...item, quan : item.quan - 1, contador: item.contador - 1, tmc: item.mc * (item.quan - 1)  }: item ),
+                cart: state.cart.map(item => item.id === itemToDelete.id ? {...item, quan : item.quan - 1, tmc: item.mc * (item.quan - 1)  }: item ),
                 products: state.products.map(item => item.id === itemToDelete.id ? {...item, contador: item.contador - 1} : item),
-                summary: {...state.summary, totalItems: state.summary.totalItems - summaryTI,  }
+                summary: summaryUpdate
             }:{
                 ...state,
                 cart: state.cart.filter((item) => item.id !== action.payload),
                 products: state.products.map(item => item.id === itemToDelete.id ? {...item, contador: item.contador - 1} : item),
-                summary: {...state.summary, totalItems: state.summary.totalItems - summaryTI }
+                summary: summaryUpdate
             }
             
         }
