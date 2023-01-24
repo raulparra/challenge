@@ -18,7 +18,7 @@ export const Article = ( { data, addArticle, dimArticle } ) => {
 
           <div className='shadow-xl h-[230px] grid content-center'>
             <div className='flex justify-center'>
-            <img src={`../src/images/${ name }.png`} alt="Artículo"/>
+            <img src={`../public/images/${ name }.png`} alt="Artículo"/>
             </div>
             <p className='text-center mt-4 text-[21px] leading-8'>{ data.name }</p>
           </div>
